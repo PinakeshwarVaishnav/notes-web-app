@@ -3,7 +3,10 @@ import { User } from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const signup = async (req: Request, res: Response) => {
+export const signup = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
   try {
     const { email, password } = req.body;
 
@@ -25,7 +28,7 @@ export const signup = async (req: Request, res: Response) => {
     await newUser.save();
     console.log("new created user is", newUser);
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "User created successfully",
       userId: newUser._id,
     });
@@ -37,7 +40,7 @@ export const signup = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
@@ -48,20 +51,20 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
+  const ispasswordvalid = await bcrypt.compare(password, user.password);
 
-  if (!isPasswordValid) {
+  if (!ispasswordvalid) {
     return res.status(401).json({
       error: "invalid password",
     });
   }
 
   const token = jwt.sign(
-    { userId: user._id, email: user.email },
-    process.env.JWT_SECRET!,
+    { userid: user._id, email: user.email },
+    process.env.jwt_secret!,
     { expiresIn: "1h" },
   );
 
   console.log("token for logged in user is", token);
-  res.json({ token });
+  return res.json({ token });
 };
