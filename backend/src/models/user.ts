@@ -2,15 +2,17 @@ import mongoose, { Schema } from "mongoose";
 import { hash } from "bcrypt";
 
 interface UserInterface {
-  username: string;
+  email: string;
   password: string;
 }
 
 const UserSchema = new Schema<UserInterface>({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true,
   },
   password: {
     type: String,
