@@ -8,7 +8,7 @@ export const signup = async (
   res: Response,
 ): Promise<Response> => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
     const existingUser = await User.findOne({
       $or: [{ email }],
@@ -21,6 +21,7 @@ export const signup = async (
     }
 
     const newUser = new User({
+      username,
       email,
       password,
     });
@@ -59,10 +60,14 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     });
   }
 
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined in environment variables");
+  }
+
   const token = jwt.sign(
     { userid: user._id, email: user.email },
-    process.env.jwt_secret!,
-    { expiresIn: "1h" },
+    process.env.JWT_SECRET,
+    { expiresIn: "24h" },
   );
 
   console.log("token for logged in user is", token);
