@@ -3,10 +3,7 @@ import { User } from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const signup = async (
-  req: Request,
-  res: Response,
-): Promise<Response> => {
+export const signup = async (req: Request, res: Response): Promise<any> => {
   try {
     const { username, email, password } = req.body;
 
@@ -41,7 +38,7 @@ export const signup = async (
   }
 };
 
-export const login = async (req: Request, res: Response): Promise<Response> => {
+export const login = async (req: Request, res: Response): Promise<any> => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
