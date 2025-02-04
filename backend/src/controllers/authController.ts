@@ -11,7 +11,7 @@ export const signup = async (
     const { username, email, password } = req.body;
 
     const existingUser = await User.findOne({
-      $or: [{ email }],
+      $or: [{ username }, { email }],
     });
 
     if (existingUser) {
