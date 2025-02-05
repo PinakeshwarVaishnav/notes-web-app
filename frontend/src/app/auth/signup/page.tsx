@@ -12,15 +12,10 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import { signup } from "./actions";
 
 export default function SignupPage() {
   const router = useRouter();
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted");
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
@@ -34,7 +29,7 @@ export default function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form action={signup} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username" className="text-sm font-medium">
                 Username
