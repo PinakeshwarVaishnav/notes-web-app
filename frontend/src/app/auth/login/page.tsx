@@ -11,8 +11,11 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission here
@@ -61,7 +64,7 @@ export default function LoginPage() {
             <Button
               variant="link"
               className="p-0 text-primary font-semibold hover:underline"
-              onClick={() => console.log("todo: redirect to signup page here")}
+              onClick={() => router.push("/auth/signup")}
             >
               Sign up
             </Button>

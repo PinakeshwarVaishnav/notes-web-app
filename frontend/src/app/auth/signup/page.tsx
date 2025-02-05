@@ -11,8 +11,11 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission here
@@ -39,7 +42,7 @@ export default function SignupPage() {
               <Input
                 id="username"
                 type="text"
-                placeholder="Enter your username here"
+                placeholder="Create username"
                 required
               />
             </div>
@@ -51,7 +54,7 @@ export default function SignupPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
                 required
               />
             </div>
@@ -73,7 +76,7 @@ export default function SignupPage() {
             <Button
               variant="link"
               className="p-0 text-primary font-semibold hover:underline"
-              onClick={() => console.log("todo: redirect to login page here")}
+              onClick={() => router.push("/auth/login")}
             >
               Log in
             </Button>
