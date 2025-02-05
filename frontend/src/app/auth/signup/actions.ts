@@ -3,7 +3,7 @@
 import axios from "axios";
 import { redirect } from "next/navigation";
 
-export async function signup(formData: FormData) {
+export async function signupAction(formData: FormData) {
   const username = formData.get("username");
   const email = formData.get("email");
   const password = formData.get("password");

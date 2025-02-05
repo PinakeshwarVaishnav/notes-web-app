@@ -12,7 +12,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
-import { signup } from "./actions";
+import { signupAction } from "./actions";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={signup} className="space-y-4">
+          <form action={signupAction} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username" className="text-sm font-medium">
                 Username
